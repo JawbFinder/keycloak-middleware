@@ -18,8 +18,12 @@ type Keycloak struct {
 	Realm        string
 }
 
-func Newkeycloak(KeycloakHost string, ClientId string, ClientSecret string, Realm string) *Keycloak {
+func NewkeycloakConfidential(KeycloakHost string, ClientId string, ClientSecret string, Realm string) *Keycloak {
 	return &Keycloak{Gocloak: *gocloak.NewClient(KeycloakHost), Clientid: ClientId, ClientSecret: ClientSecret, Realm: Realm}
+}
+
+func NewkeycloakPublic(KeycloakHost string, ClientId string, Realm string) *Keycloak {
+	return &Keycloak{Gocloak: *gocloak.NewClient(KeycloakHost), Clientid: ClientId, Realm: Realm}
 }
 
 type KeyCloakMiddleware struct {
