@@ -2,7 +2,6 @@ package middlewares
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
@@ -75,7 +74,7 @@ func (auth *KeyCloakMiddleware) KeycloakMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		jwt, _, err := auth.keycloak.Gocloak.DecodeAccessToken(context.Background(), token, auth.keycloak.Realm)
+		_, _, err = auth.keycloak.Gocloak.DecodeAccessToken(context.Background(), token, auth.keycloak.Realm)
 		if err != nil {
 			fmt.Println(c.Params, fmt.Sprintf("Invalid or malformed token: %s", err.Error()), http.StatusUnauthorized)
 			c.AbortWithError(http.StatusUnauthorized, err)
@@ -83,9 +82,6 @@ func (auth *KeyCloakMiddleware) KeycloakMiddleware() gin.HandlerFunc {
 			c.Next()
 			return
 		}
-
-		jwtj, _ := json.Marshal(jwt)
-		fmt.Printf("token: %v\n", string(jwtj))
 
 		// check if the token isn't expired and valid
 		if !*result.Active {
