@@ -20,6 +20,7 @@ type Keycloak struct {
 
 func NewkeycloakConfidential(KeycloakHost string, ClientId string, ClientSecret string, Realm string) *Keycloak {
 	return &Keycloak{Gocloak: *gocloak.NewClient(KeycloakHost), Clientid: ClientId, ClientSecret: ClientSecret, Realm: Realm}
+
 }
 
 func NewkeycloakPublic(KeycloakHost string, ClientId string, Realm string) *Keycloak {
@@ -44,7 +45,6 @@ func (auth *KeyCloakMiddleware) KeycloakMiddleware() gin.HandlerFunc {
 
 		// try to extract Authorization parameter from the HTTP header
 		token := c.GetHeader("Authorization")
-		fmt.Println(token)
 
 		if token == "" {
 			fmt.Println(c.Params, "Authorization header missing", http.StatusUnauthorized)
