@@ -1,4 +1,4 @@
-module jawb_finder/user-service-api/middlewares
+module github.com/JawbFinder/keycloak-middleware
 
 go 1.21.1
 
