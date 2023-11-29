@@ -1,6 +1,6 @@
 module github.com/JawbFinder/keycloak-middleware
 
-go 1.21.1
+go 1.23
 
 require (
 	github.com/Nerzal/gocloak/v13 v13.8.0
