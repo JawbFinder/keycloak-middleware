@@ -4,11 +4,9 @@
 name: Go Publish Module
 
 on:
-  push:
-    branches: [ "main" ]
   workflow_dispatch:
     inputs:
-      message:
+      tag:
         required: true
 
 jobs:
@@ -38,6 +36,6 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: 'refs/tags/${{ github.event.inputs.message }}',
+            ref: 'refs/tags/${{ github.event.inputs.tag }}',
             sha: context.sha
           })
